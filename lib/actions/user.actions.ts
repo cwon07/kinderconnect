@@ -1,7 +1,10 @@
 'use server'
 
+import { revalidatePath } from 'next/cache'
+
 import { connectToDatabase } from '@/lib/database'
 import User from '@/lib/database/models/user.model'
+import Event from '../database/models/event.model';
 import { handleError } from '@/lib/utils'
 
 import { CreateUserParams, UpdateUserParams } from '@/types'
@@ -41,4 +44,26 @@ export async function updateUser(clerkId: string, user: UpdateUserParams) {
   } catch (error) {
     handleError(error)
   }
+}
+
+export async function deleteUser(clerkId: string) {
+  try {
+    await connectToDatabase()
+
+    // Find user to delete
+    const userToDelete = await User.findOne({ clerkId })
+
+    if (!userToDelete) {
+      throw new Error('User not found')
+    }
+ 
+    // Delete user
+    const deletedUser = await User.findByIdAndDelete(userToDelete._id)
+    revalidatePath('/')
+
+    return deletedUser ? JSON.parse(JSON.stringify(deletedUser)) : null
+  } catch (error) {
+    handleError(error)
+  }
+  
 }
