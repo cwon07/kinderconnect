@@ -13,7 +13,7 @@ export default authMiddleware({
     '/api/webhook/clerk',
     '/api/webhook/stripe',
     '/api/uploadthing',
-    '/api/{routeName}'
+    '/api/{https://kinderconnect-git-main-cwon07s-projects.vercel.app/api/webhooks/clerk}'
   ]
 });
  
