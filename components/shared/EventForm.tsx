@@ -205,6 +205,7 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
                       <p className="ml-3 whitespace-nowrap text-grey-600">Start Date:</p>
                       <DatePicker 
                         selected={field.value} 
+                        // onChange is giving an error causing the deployment to be unsuccessful
                         // onChange={(date: Date) => field.onChange(date)} 
                         showTimeSelect
                         timeInputLabel="Time:"
