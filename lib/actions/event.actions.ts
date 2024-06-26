@@ -107,16 +107,16 @@ export async function getAllEvents({ query, limit = 6, page, category }: GetAllE
 
     const skipAmount = (Number(page) - 1) * limit
     const eventsQuery = Event.find(conditions)
-      .sort({ createdAt: 'desc' })
+      .sort({ createdAt: 'desc' }) // descending order, new ones on top
       .skip(skipAmount)
-      .limit(limit)
+      .limit(limit) // 6 by default
 
     const events = await populateEvent(eventsQuery)
-    const eventsCount = await Event.countDocuments(conditions)
+    const eventsCount = await Event.countDocuments(conditions) // for implementing pagination
 
     return {
       data: JSON.parse(JSON.stringify(events)),
-      totalPages: Math.ceil(eventsCount / limit),
+      totalPages: Math.ceil(eventsCount / limit), // top number of the events count divided by the limit(6)
     }
   } catch (error) {
     handleError(error)

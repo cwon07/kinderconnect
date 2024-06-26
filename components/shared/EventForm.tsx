@@ -317,7 +317,6 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
             />
         </div>
 
-
         <Button 
           type="submit"
           size="lg"
