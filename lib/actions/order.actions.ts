@@ -35,7 +35,7 @@ export const checkoutOrder = async (order: CheckoutOrderParams) => {
       },
       mode: 'payment',
       success_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/profile`,
-      cancel_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/`,
+      cancel_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/`, // changed from localhost:3000
     });
 
     redirect(session.url!)
